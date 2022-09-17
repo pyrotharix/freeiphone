@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta content="ie=edge" http-equiv="x-ua-compatible">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="true" name="HandheldFriendly">
+	<title>Крути колесо! Выиграй приз!</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;display=swap&amp;subset=cyrillic" rel="stylesheet">
+	<link href="./img/favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+	<link href="./img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+	<link href="./img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+	<link href="./img/favicon/site.webmanifest" rel="manifest">
+	<meta content="#da532c" name="msapplication-TileColor">
+	<meta content="#ffffff" name="theme-color">
+	<link href="main.css" rel="stylesheet">	
+	<script>
+		var url="https://analiticbet.ru/streams/?u=672&stream=more_info&reg=3"; //здесь ссылка куда отправляем пользователя
+	</script>
+</head>
+<body>
+	<div class="main">
+		<header class="header">
+			<div class="header__spin">
+				<span>Осталось попыток:</span><span class="header__spin-value" id="counter_spin">2</span>
+			</div><a class="header__logo redirectlink"><img alt="Pinup" src="img/logo.png"></a>
+			<div class="header__registration">
+				<span>Хочешь выиграть айфон и другие крутые подарки - жми кнопку КРУТИТЬ!</span>
+			</div>
+			<div class="product header__img">
+				<img src="img/iphone.png" alt="">
+			</div>
+		</header>
+		<div id="run-circle" class="main__wheel-layout stage-1">
+			<div class="main__achievements">
+				<div class="main__achievements-bonus hide"></div>
+				<div class="main__achievements-spin hide"></div>
+			</div>
+			<div class="main__spinner">
+				<div class="main__spinner-img"></div>
+				<div class="main__spinner-overlay"></div>
+				<div class="main__spinner-button">
+					<button></button>
+				</div>
+			</div>
+			<div class="main__win"></div>
+		</div>
+		<div class="info">
+			<div class="info-icon"></div>
+			<div class="info-text">Игровая механика этого сайта не предполагает моментальное получение подарка. <br>
+				Для участия в розыгрыше вам необходимо иметь 10 дней оплаченных услуг. <br>
+				Подробнее на <a href="https://prizes.analiticbet.ru/" trget="_blank">сайте Акции</a>.</div>
+		</div>
+		<!-- main__modal_show -->
+		<div class="main__modal">
+
+		</div>
+	</div>
+	<!-- <script src="main.js"></script> -->
+	<script>
+		var spinBtn = document.getElementById('run-circle')
+		var spinnerLayout = document.querySelector('.main__wheel-layout')
+		var modal = document.querySelector('.main__modal')
+		var firstContent = `<div class="modal">
+					<div class="modal__wrapper">
+						<div class="title__header">
+							<h1>Поздравляем!</h1>
+						</div>
+						<div class="title__subheader">
+							<h2><span>Подарок от партнера:</span><span class="title__subheader-accent">1000 рублей</span></h2>
+						</div>
+						<div class="modal__img product">
+							<img src="img/1000-rub.png" alt="">
+						</div>
+						<button class="submit-btn modal-btn">Крутить еще раз</button>
+					</div>
+				</div>`
+		var secondContent = `<div class="modal">
+					<div class="modal__wrapper">
+						<div class="title__header">
+							<h1>Поздравляем!</h1>
+						</div>
+						<div class="title__subheader">
+							<h2><span>Вы почти выиграли:</span><span class="title__subheader-accent">IPhone 13 128gb</span></h2>
+						</div>
+						<div class="modal__img product">
+							<img src="img/iphone.png" alt="">
+						</div>
+						<div class="modal__content">
+							<p>1. Нажмите <span>"Получить iPhone 13"</span> и пройдите быструю регистрацию</p>
+							<p>2. Важно! <span>Оплатите 1 рубль</span> для доступа к аналитике на 5 дней</p>
+							<p>3. <span>Для получения iPhone 13</span> подтвердите участие в Акции и дождитесь розыгрыша</p>
+							<p>4. <span>Получите 1000₽</span> от партнера и другие подарки</p>
+						</div>
+						<a href=" `+url+ `" class="submit-btn">Получить IPhone 13</a>
+					</div>
+				</div>`
+
+		spinBtn.addEventListener('click', function() {
+			this.style.pointerEvents = 'none'
+			document.getElementById('counter_spin').textContent = '1'
+			spinnerLayout.classList.add('spin-to-stage-two');
+			setTimeout(function() {
+				spinnerLayout.classList.remove('spin-to-stage-two', 'stage-1');
+				spinnerLayout.classList.add('stage-2');
+				modal.innerHTML = firstContent
+				modal.classList.add('main__modal_show');
+				finishStep()
+			}, 4000)
+		});
+
+		function finishStep() {
+			document.querySelector('.modal-btn').addEventListener('click', function() {
+				document.getElementById('counter_spin').textContent = '0'
+				modal.classList.remove('main__modal_show');
+				spinnerLayout.classList.remove('stage-2');
+				spinnerLayout.classList.add('spin-to-stage-three');
+				setTimeout(function() {
+					modal.innerHTML = secondContent
+					document.querySelector('.main__modal').classList.add('main__modal_show')
+				}, 4000)
+			})
+		};
+	</script>
+</body>
+</html>
